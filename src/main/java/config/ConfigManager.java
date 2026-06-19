@@ -31,4 +31,20 @@ class ConfigManager {
         }
         return value.trim();
     }
+
+    public static boolean getBoolean(String key) {
+        String value;
+        try {
+            value = get(key);
+        } catch (RuntimeException e) {
+            // Catching the exception from get() if the key doesn't exist at all
+            return false;
+        }
+        // Handle cases where the key exists but has no value (e.g., "browser.headless=")
+        if (value.trim().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 }
