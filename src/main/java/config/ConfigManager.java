@@ -4,6 +4,7 @@ import java.util.Properties;
 
 class ConfigManager {
     private static final String PROPERTY_FILE_PATH = "src/main/resources/config.properties";
+    private static final String ENV_FILE_PATH = "src/main/resources/%s.properties";
     private static final ConfigLoader loader = new ConfigLoader();
 
     private static final Properties finalProperties = new Properties();
@@ -11,6 +12,12 @@ class ConfigManager {
     static {
         Properties baseProps = loader.loadPropertiesFile(PROPERTY_FILE_PATH);
         finalProperties.putAll(baseProps);
+
+        String environment = System.getProperty("env", "test").toLowerCase();
+        String envFilePath = String.format(ENV_FILE_PATH, environment);
+
+        Properties envProps = loader.loadPropertiesFile(envFilePath);
+        finalProperties.putAll(envProps);
     }
     static String get(String key) {
         String systemOverride = System.getProperty(key);

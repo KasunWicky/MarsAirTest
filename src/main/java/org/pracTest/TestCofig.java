@@ -9,6 +9,8 @@ public class TestCofig {
     public void testing1() {
         log.info("Test");
         String browser = EnvConfig.BROWSER;
+        String user = EnvConfig.USER;
         System.out.println(browser);
+        System.out.println(user);
     }
 }
