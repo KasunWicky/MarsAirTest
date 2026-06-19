@@ -2,7 +2,7 @@ package config;
 
 import java.util.Properties;
 
-public class ConfigManager {
+class ConfigManager {
     private static final String PROPERTY_FILE_PATH = "src/main/resources/config.properties";
     private static final ConfigLoader loader = new ConfigLoader();
 
@@ -12,8 +12,7 @@ public class ConfigManager {
         Properties baseProps = loader.loadPropertiesFile(PROPERTY_FILE_PATH);
         finalProperties.putAll(baseProps);
     }
-
-   public static String get(String key) {
+    static String get(String key) {
         String systemOverride = System.getProperty(key);
         if (systemOverride != null) {
             return systemOverride.trim();
