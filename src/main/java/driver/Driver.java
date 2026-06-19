@@ -1,24 +1,30 @@
 package driver;
 
 import config.EnvConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 
+@Slf4j
 public class Driver {
     private static final String BROWSER = EnvConfig.BROWSER;
     private static final String URL = EnvConfig.URL;
 
     public static WebDriver getDriver() {
-        return switch (BROWSER) {
+        log.info("The browser is being invoked on URL:{}", URL);
+        return switch (BROWSER.toLowerCase()) {
             case "firefox" -> getFirefoxDriver();
+            case "safari" -> getSafariDriver();
             default -> getChromeDriver();
         };
     }
 
     static WebDriver getChromeDriver() {
+        log.info("Chrome browser is being invoked");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");
         ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
@@ -27,10 +33,19 @@ public class Driver {
     }
 
     static WebDriver getFirefoxDriver() {
+        log.info("Firefox browser is being invoked");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("start-maximized");
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxOptions);
         firefoxDriver.get(URL);
         return firefoxDriver;
+    }
+
+    static WebDriver getSafariDriver() {
+        log.info("Safari browser is being invoked");
+        SafariDriver safariDriver = new SafariDriver();
+        safariDriver.get(URL);
+        safariDriver.manage().window().fullscreen();
+        return safariDriver;
     }
 }
