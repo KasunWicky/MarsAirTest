@@ -19,6 +19,7 @@ class ConfigManager {
         Properties envProps = loader.loadPropertiesFile(envFilePath);
         finalProperties.putAll(envProps);
     }
+
     static String get(String key) {
         String systemOverride = System.getProperty(key);
         if (systemOverride != null) {
@@ -45,6 +46,22 @@ class ConfigManager {
             return false;
         }
         return true;
+    }
+
+    public static int getInt(String key) {
+        try {
+            return Integer.parseInt(get(key));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Configuration key '" + key + "' value cannot be parsed to an Integer.", e);
+        }
+    }
+
+    public static float getFloat(String key) {
+        try {
+            return Float.parseFloat(get(key));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Configuration key '" + key + "' value cannot be parsed to a Float.", e);
+        }
     }
 
 }
