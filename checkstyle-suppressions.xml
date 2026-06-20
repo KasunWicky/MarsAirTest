@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
+
+<suppressions>
+    <!-- Indentation -->
+    <suppress checks="Indentation"          files=".*\.java"/>
+
+    <!-- Line length -->
+    <suppress checks="LineLength"           files=".*\.java"/>
+
+    <!-- Whitespace -->
+    <suppress checks="WhitespaceAround"     files=".*\.java"/>
+    <suppress checks="WhitespaceAfter"      files=".*\.java"/>
+    <suppress checks="NoWhitespaceAfter"    files=".*\.java"/>
+    <suppress checks="NoWhitespaceBefore"   files=".*\.java"/>
+    <suppress checks="GenericWhitespace"    files=".*\.java"/>
+    <suppress checks="EmptyLineSeparator"   files=".*\.java"/>
+    <suppress checks="MethodParamPad"       files=".*\.java"/>
+    <suppress checks="ParenPad"             files=".*\.java"/>
+    <suppress checks="OperatorWrap"         files=".*\.java"/>
+    <suppress checks="SeparatorWrap"        files=".*\.java"/>
+</suppressions>
