@@ -1,9 +1,8 @@
-package org.pracTest;
+package testsCases;
 
 import driver.Driver;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -12,7 +11,7 @@ import webElements.MainPage;
 import webElements.SearchResultPage;
 
 @Slf4j
-public class TestHomePage extends CommonCommands {
+public class BookingFlightTest extends CommonCommands {
     WebDriver driver;
     SearchResultPage searchResultPage;
     SoftAssert softAssert;
@@ -44,8 +43,8 @@ public class TestHomePage extends CommonCommands {
     @Test(dependsOnMethods = "verifyingHomePage", dataProvider = "flightScheduleData")
     public void bookFlight(String departing, String returning, String expectedResults) {
         MainPage mainPage = new MainPage(driver);
+        until(mainPage.getDepartingDropdown(), Until.VISIBLE);
         softAssert = new SoftAssert();
-        wait(driver).until(ExpectedConditions.elementToBeClickable(mainPage.getDepartingDropdown()));
         selectDropDown(mainPage.getDepartingDropdown(), departing);
         selectDropDown(mainPage.getReturningDropdown(), returning);
         click(mainPage.getSearchButton());
@@ -53,17 +52,14 @@ public class TestHomePage extends CommonCommands {
         softAssert.assertAll();
     }
 
-    public void verifySearchResults(String expectedResult) {
+    private void verifySearchResults(String expectedResult) {
         searchResultPage = new SearchResultPage(driver);
-        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.getMainHeader()));
         Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
         softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
-        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.getBackLink()));
-        wait(driver).until(ExpectedConditions.elementToBeClickable(searchResultPage.getBackLink()));
         click(searchResultPage.getBackLink());
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void quit() {
         log.info("Test is being closed");
         Driver.quitDriver();
