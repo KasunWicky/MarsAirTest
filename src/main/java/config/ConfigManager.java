@@ -41,11 +41,7 @@ class ConfigManager {
             // Catching the exception from get() if the key doesn't exist at all
             return false;
         }
-        // Handle cases where the key exists but has no value (e.g., "browser.headless=")
-        if (value.trim().isEmpty()) {
-            return false;
-        }
-        return true;
+        return Boolean.parseBoolean(value.trim());
     }
 
     public static int getInt(String key) {
