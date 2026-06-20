@@ -12,15 +12,15 @@ public class SearchResultPage {
         this.driver = driver;
     }
 
-    public WebElement mainHeader() {
+    public WebElement getMainHeader() {
         return driver.findElement(By.cssSelector("h2"));
     }
 
-    public WebElement linkbutton_back() {
+    public WebElement getBackLink() {
         return driver.findElement(By.xpath("//a[text()=' Back']"));
     }
 
-    public WebElement textbox_Result() {
+    public WebElement getResultText() {
         return driver.findElement(By.cssSelector("div#content>p:nth-of-type(1)"));
     }
 }

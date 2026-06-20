@@ -12,27 +12,27 @@ public class MainPage {
         this.driver = driver;
     }
 
-    public WebElement dropdown_departing() {
+    public WebElement getDepartingDropdown() {
         return driver.findElement(By.id("departing"));
     }
 
-    public WebElement dropdown_returning() {
+    public WebElement getReturningDropdown() {
         return driver.findElement(By.id("returning"));
     }
 
-    public WebElement textBox_promotionalCode() {
+    public WebElement getPromotionalCodeField() {
         return driver.findElement(By.id("promotional_code"));
     }
 
-    public WebElement button_search() {
+    public WebElement getSearchButton() {
         return driver.findElement(By.cssSelector("input[type='submit']"));
     }
 
-    public WebElement mainHeader() {
+    public WebElement getMainHeader() {
         return driver.findElement(By.cssSelector("h2"));
     }
 
-    public WebElement subHeader() {
+    public WebElement getSubHeader() {
         return driver.findElement(By.cssSelector("h3"));
     }
 }

@@ -45,22 +45,22 @@ public class TestHomePage extends CommonCommands {
     public void bookFlight(String departing, String returning, String expectedResults) {
         MainPage mainPage = new MainPage(driver);
         softAssert = new SoftAssert();
-        wait(driver).until(ExpectedConditions.elementToBeClickable(mainPage.dropdown_departing()));
-        selectDropDown(mainPage.dropdown_departing(), departing);
-        selectDropDown(mainPage.dropdown_returning(), returning);
-        click(mainPage.button_search());
+        wait(driver).until(ExpectedConditions.elementToBeClickable(mainPage.getDepartingDropdown()));
+        selectDropDown(mainPage.getDepartingDropdown(), departing);
+        selectDropDown(mainPage.getReturningDropdown(), returning);
+        click(mainPage.getSearchButton());
         verifySearchResults(expectedResults);
         softAssert.assertAll();
     }
 
     public void verifySearchResults(String expectedResult) {
         searchResultPage = new SearchResultPage(driver);
-        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.mainHeader()));
-        Assert.assertEquals(searchResultPage.mainHeader().getText(), "Search Results");
-        softAssert.assertEquals(searchResultPage.textbox_Result().getText(), expectedResult);
-        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.linkbutton_back()));
-        wait(driver).until(ExpectedConditions.elementToBeClickable(searchResultPage.linkbutton_back()));
-        click(searchResultPage.linkbutton_back());
+        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.getMainHeader()));
+        Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
+        softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
+        wait(driver).until(ExpectedConditions.visibilityOf(searchResultPage.getBackLink()));
+        wait(driver).until(ExpectedConditions.elementToBeClickable(searchResultPage.getBackLink()));
+        click(searchResultPage.getBackLink());
     }
 
     @AfterClass
