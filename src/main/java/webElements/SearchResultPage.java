@@ -23,4 +23,12 @@ public class SearchResultPage {
     public WebElement getResultText() {
         return driver.findElement(By.cssSelector("div#content>p:nth-of-type(1)"));
     }
+
+    public WebElement getResultSecondaryText() {
+        return driver.findElement(By.cssSelector("div#content>p:nth-of-type(2)"));
+    }
+
+    public WebElement getCallNowResultText() {
+        return driver.findElement(By.cssSelector("div#content>p:nth-of-type(3)"));
+    }
 }

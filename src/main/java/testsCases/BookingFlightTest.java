@@ -19,12 +19,14 @@ public class BookingFlightTest extends CommonCommands {
     @DataProvider(name = "flightScheduleData")
     private Object[][] flightScheduleData() {
         return new Object[][]{
-                {"Select...", "Select...", "Unfortunately, this schedule is not possible. Please try again."},
-                {"July", "July", "Unfortunately, this schedule is not possible. Please try again."},
-                {"July", "December", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "July", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "December", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "July (next year)", "Unfortunately, this schedule is not possible. Please try again."}
+                {"Select...", "Select...", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"July", "July", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"July", "December", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"December", "July", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"December", "December", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"December", "July (next year)", "", "Unfortunately, this schedule is not possible. Please try again."},
+                {"July", "December (two years from now)", "", "Seats available!"},
+                {"July", "December (two years from now)", "AF3-FJK-418", "Seats available!"}
         };
     }
 
@@ -41,12 +43,16 @@ public class BookingFlightTest extends CommonCommands {
     }
 
     @Test(dependsOnMethods = "verifyingHomePage", dataProvider = "flightScheduleData")
-    public void bookFlight(String departing, String returning, String expectedResults) {
+    public void bookFlight(String departing, String returning, String promoCode, String expectedResults) {
         MainPage mainPage = new MainPage(driver);
         until(mainPage.getDepartingDropdown(), Until.VISIBLE);
         softAssert = new SoftAssert();
         selectDropDown(mainPage.getDepartingDropdown(), departing);
         selectDropDown(mainPage.getReturningDropdown(), returning);
+        if (!promoCode.isEmpty()) {
+            log.info("Promotional code '{}' is preset", promoCode);
+            type(mainPage.getPromotionalCodeField(), promoCode);
+        }
         click(mainPage.getSearchButton());
         verifySearchResults(expectedResults);
         softAssert.assertAll();
@@ -56,6 +62,7 @@ public class BookingFlightTest extends CommonCommands {
         searchResultPage = new SearchResultPage(driver);
         Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
         softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
+        //Validate Assert equals with promocode message
         click(searchResultPage.getBackLink());
     }
 
