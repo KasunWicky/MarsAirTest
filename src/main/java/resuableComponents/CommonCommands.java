@@ -4,13 +4,13 @@ import config.EnvConfig;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-
-
 import java.time.Duration;
+import runner.ScreenshotListener;
+import org.testng.annotations.Listeners;
 
+@Listeners(ScreenshotListener.class)
 public class CommonCommands {
     private static final int DEFAULT_TIMEOUT_SECONDS = EnvConfig.EXPLICIT_WAIT;
     private static final int DEFAULT_POLLING_MS = EnvConfig.POLLING_MS;

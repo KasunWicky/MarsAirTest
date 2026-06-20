@@ -1,6 +1,7 @@
 package runner;
 
 import groups.TestGroup;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
@@ -9,7 +10,7 @@ import org.testng.xml.XmlTest;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 public class TestSuiteRunner {
 
     private static final String GROUPS_PACKAGE = "groups.";
@@ -18,18 +19,20 @@ public class TestSuiteRunner {
         String groupName = resolveGroupName(args);
         TestGroup group  = loadGroup(groupName);
 
-        System.out.println("========================================");
-        System.out.println("Group  : " + groupName);
-        System.out.println("Suite  : " + group.getSuiteName());
-        System.out.println("Classes: " + group.getTestClasses().stream()
+        log.info("========================================");
+        log.info("Group  : {}",  groupName);
+        log.info("Suite  : {}", group.getSuiteName());
+        log.info("Classes: {}" , group.getTestClasses().stream()
                 .map(Class::getSimpleName)
                 .collect(Collectors.joining(", ")));
-        System.out.println("========================================");
+        log.info("========================================");
 
         XmlSuite suite = buildSuite(group);
 
         TestNG testng = new TestNG();
         testng.setXmlSuites(Collections.singletonList(suite));
+        testng.setOutputDirectory("target/test-output");  // report output
+        testng.addListener(new ScreenshotListener());
         testng.run();
 
         System.exit(testng.getStatus());

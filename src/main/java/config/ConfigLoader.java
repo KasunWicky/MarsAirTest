@@ -13,6 +13,7 @@ class ConfigLoader {
         try {
             FileInputStream fis = new FileInputStream(path.toFile());
             properties.load(fis);
+            fis.close();
         } catch (IOException e) {
             throw new RuntimeException("Target properties file not found at: " + filePath, e);
         }

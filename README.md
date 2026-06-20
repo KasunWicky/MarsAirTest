@@ -13,3 +13,14 @@ Environment selection:
 Default environment mode is test. 
 To enable : -Denv=<envName>
 eg : -Denv=stage; -Denv=test
+
+Validate the style check
+mvn validate 
+
+
+# Smoke
+-Dtestgroup
+mvn compile exec:java -Dexec.mainClass="runner.TestSuiteRunner" -Dexec.args="smoke"
+
+# Regression
+mvn compile exec:java -Dexec.mainClass="runner.TestSuiteRunner" -Dexec.args="regression"
