@@ -17,7 +17,7 @@ public class SearchResultPage {
     }
 
     public WebElement linkbutton_back() {
-        return driver.findElement(By.linkText("back"));
+        return driver.findElement(By.xpath("//a[text()=' Back']"));
     }
 
     public WebElement textbox_Result() {
