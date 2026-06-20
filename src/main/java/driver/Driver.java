@@ -15,14 +15,33 @@ public class Driver {
     private static final String URL = EnvConfig.URL;
     private static final boolean HEADLESS = EnvConfig.HEADLESS;
 
+    private static WebDriver webDriver;
 
+    /**
+     * Returns the existing WebDriver instance, creating one if it does not exist.
+     * Calling this multiple times returns the same browser session.
+     */
     public static WebDriver getDriver() {
-        log.info("The browser is being invoked on URL:{}", URL);
-        return switch (BROWSER.toLowerCase()) {
-            case "firefox" -> getFirefoxDriver();
-            case "safari" -> getSafariDriver();
-            default -> getChromeDriver();
-        };
+        if (webDriver == null) {
+            log.info("The browser is being invoked on URL: {}", URL);
+            webDriver = switch (BROWSER.toLowerCase()) {
+                case "firefox" -> getFirefoxDriver();
+                case "safari" -> getSafariDriver();
+                default -> getChromeDriver();
+            };
+        }
+        return webDriver;
+    }
+
+    /**
+     * Quits the browser and clears the instance.
+     */
+    public static void quitDriver() {
+        if (webDriver != null) {
+            log.info("Closing the browser");
+            webDriver.quit();
+            webDriver = null;
+        }
     }
 
     static WebDriver getChromeDriver() {

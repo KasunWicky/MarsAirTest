@@ -63,9 +63,9 @@ public class TestHomePage extends CommonCommands {
         click(searchResultPage.linkbutton_back());
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void quit() {
         log.info("Test is being closed");
-        driver.quit();
+        Driver.quitDriver();
     }
 }
