@@ -49,10 +49,20 @@ public class BookingFlightTest extends CommonCommands {
             log.info("Promotional code :'{}' is present", promoCode);
             type(mainPage.getPromotionalCodeField(), promoCode);
         }
-        log.info("User hit submit button");
+        log.info("User hit the submit button");
         click(mainPage.getSearchButton());
         waitForPageLoad();
-        verifySearchResults(expectedResults);
+        if (!promoCode.isEmpty()) {
+            //Verifying the promotional code
+            verifySearchResultsPromoCode(expectedResults, Utility.buildExpectedPromoResult(promoCode));
+        } else {
+            //Verifying without the promotional code
+            verifySearchResults(expectedResults);
+
+        }
+        click(searchResultPage.getBackLink());
+        waitForPageLoad();
+
         softAssert.assertAll();
     }
 
@@ -63,9 +73,13 @@ public class BookingFlightTest extends CommonCommands {
         Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
         log.info("Validating search result page");
         softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
-        //Validate Assert equals with promocode message
-        click(searchResultPage.getBackLink());
-        waitForPageLoad();
+
+    }
+
+    private void verifySearchResultsPromoCode(String expectedResult, String expectedPromoResult) {
+        verifySearchResults(expectedResult);
+        log.info("Validating promotional code message");
+        softAssert.assertEquals(searchResultPage.getResultSecondaryText().getText(), expectedPromoResult);
     }
 
     @AfterClass(alwaysRun = true)
