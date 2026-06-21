@@ -1,4 +1,4 @@
-package resuableComponents;
+package resuablecomponents;
 
 import config.EnvConfig;
 import driver.Driver;

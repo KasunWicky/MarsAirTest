@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-import resuableComponents.CommonCommands;
+import resuablecomponents.CommonCommands;
 import utils.Utility;
 import webElements.MainPage;
 import webElements.SearchResultPage;
@@ -41,9 +41,9 @@ public class BookingFlightTest extends CommonCommands {
         waitForPageLoad();
         until(mainPage.getDepartingDropdown(), Until.VISIBLE);
         softAssert = new SoftAssert();
-        log.info("Selecting 'Departing' DpDwn");
+        log.info("Selecting 'Departing' DropDown");
         selectDropDown(mainPage.getDepartingDropdown(), departing);
-        log.info("Selecting 'Returning' DpDwn");
+        log.info("Selecting 'Returning' DropDown");
         selectDropDown(mainPage.getReturningDropdown(), returning);
         if (!promoCode.isEmpty()) {
             log.info("Promotional code :'{}' is present", promoCode);
