@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import resuableComponents.CommonCommands;
+import utils.Utility;
 import webElements.MainPage;
 import webElements.SearchResultPage;
 
@@ -18,16 +19,7 @@ public class BookingFlightTest extends CommonCommands {
 
     @DataProvider(name = "flightScheduleData")
     private Object[][] flightScheduleData() {
-        return new Object[][]{
-                {"Select...", "Select...", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"July", "July", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"July", "December", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "July", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "December", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"December", "July (next year)", "", "Unfortunately, this schedule is not possible. Please try again."},
-                {"July", "December (two years from now)", "", "Seats available!"},
-                {"July", "December (two years from now)", "AF3-FJK-418", "Seats available!"}
-        };
+        return Utility.readCsv("testdata/flightCombinationData.csv");
     }
 
     @BeforeClass
