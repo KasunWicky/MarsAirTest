@@ -3,9 +3,7 @@ package resuableComponents;
 import config.EnvConfig;
 import driver.Driver;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -43,6 +41,12 @@ public class CommonCommands {
         Select dropDown = new Select(element);
         dropDown.selectByVisibleText(selectText);
         log.info("Drop down select value '{}'", selectText);
+    }
+
+    public static void waitForPageLoad() {
+        buildWait(Driver.getDriver())
+                .until(driver -> ((JavascriptExecutor) driver)
+                        .executeScript("return document.readyState").equals("complete"));
     }
 
     public static void type(WebElement element, String textToType) {
@@ -86,7 +90,7 @@ public class CommonCommands {
         return new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS))    // Max wait time
                 .pollingEvery(Duration.ofMillis(DEFAULT_POLLING_MS))   // Frequency of DOM checks
-                .ignoring(NoSuchElementException.class);// Disregard this error during loops
+                .ignoring(NoSuchElementException.class);
     }
 
 }

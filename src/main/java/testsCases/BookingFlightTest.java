@@ -38,6 +38,7 @@ public class BookingFlightTest extends CommonCommands {
     @Test(dependsOnMethods = "verifyingHomePage", dataProvider = "flightScheduleData")
     public void bookFlight(String departing, String returning, String promoCode, String expectedResults) {
         MainPage mainPage = new MainPage(driver);
+        waitForPageLoad();
         until(mainPage.getDepartingDropdown(), Until.VISIBLE);
         softAssert = new SoftAssert();
         log.info("Selecting 'Departing' DpDwn");
@@ -50,18 +51,21 @@ public class BookingFlightTest extends CommonCommands {
         }
         log.info("User hit submit button");
         click(mainPage.getSearchButton());
+        waitForPageLoad();
         verifySearchResults(expectedResults);
         softAssert.assertAll();
     }
 
     private void verifySearchResults(String expectedResult) {
         searchResultPage = new SearchResultPage(driver);
+        waitForPageLoad();
         log.info("Verifying Search result page output");
         Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
         log.info("Validating search result page");
         softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
         //Validate Assert equals with promocode message
         click(searchResultPage.getBackLink());
+        waitForPageLoad();
     }
 
     @AfterClass(alwaysRun = true)
