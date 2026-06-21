@@ -40,6 +40,7 @@ public class BookingFlightTest extends CommonCommands {
         log.info("Test is being initiated");
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, "Mars Airlines: Home");
+        log.info("Verified user is Home page");
     }
 
     @Test(dependsOnMethods = "verifyingHomePage", dataProvider = "flightScheduleData")
@@ -47,12 +48,15 @@ public class BookingFlightTest extends CommonCommands {
         MainPage mainPage = new MainPage(driver);
         until(mainPage.getDepartingDropdown(), Until.VISIBLE);
         softAssert = new SoftAssert();
+        log.info("Selecting 'Departing' DpDwn");
         selectDropDown(mainPage.getDepartingDropdown(), departing);
+        log.info("Selecting 'Returning' DpDwn");
         selectDropDown(mainPage.getReturningDropdown(), returning);
         if (!promoCode.isEmpty()) {
-            log.info("Promotional code '{}' is preset", promoCode);
+            log.info("Promotional code :'{}' is present", promoCode);
             type(mainPage.getPromotionalCodeField(), promoCode);
         }
+        log.info("User hit submit button");
         click(mainPage.getSearchButton());
         verifySearchResults(expectedResults);
         softAssert.assertAll();
@@ -60,7 +64,9 @@ public class BookingFlightTest extends CommonCommands {
 
     private void verifySearchResults(String expectedResult) {
         searchResultPage = new SearchResultPage(driver);
+        log.info("Verifying Search result page output");
         Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
+        log.info("Validating search result page");
         softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
         //Validate Assert equals with promocode message
         click(searchResultPage.getBackLink());

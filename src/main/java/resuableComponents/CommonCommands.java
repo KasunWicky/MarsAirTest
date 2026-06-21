@@ -2,6 +2,7 @@ package resuableComponents;
 
 import config.EnvConfig;
 import driver.Driver;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ import java.time.Duration;
 import runner.ScreenshotListener;
 import org.testng.annotations.Listeners;
 
-
+@Slf4j
 @Listeners(ScreenshotListener.class)
 public class CommonCommands {
     private static final int DEFAULT_TIMEOUT_SECONDS = EnvConfig.EXPLICIT_WAIT;
@@ -27,6 +28,7 @@ public class CommonCommands {
     public static void click(WebElement element) {
         until(element, Until.VISIBLE);
         until(element, Until.CLICKABLE);
+        log.info("Clicking on button");
         element.click();
     }
 
@@ -40,12 +42,14 @@ public class CommonCommands {
         until(element, Until.ENABLED);
         Select dropDown = new Select(element);
         dropDown.selectByVisibleText(selectText);
+        log.info("Drop down select value '{}'", selectText);
     }
 
     public static void type(WebElement element, String textToType) {
         until(element, Until.VISIBLE);
         until(element, Until.CLICKABLE);
         element.clear();
+        log.info("Entering '{}' text into the field", textToType);
         element.sendKeys(textToType);
     }
 
