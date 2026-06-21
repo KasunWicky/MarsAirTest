@@ -20,8 +20,8 @@ public class CommonCommands {
     private static final int DEFAULT_POLLING_MS = EnvConfig.POLLING_MS;
 
     /**
-     *
-     * @param element
+     * Waits for element to be visible and clickable, then clicks it.
+     * @param element the element to click
      */
     public static void click(WebElement element) {
         until(element, Until.VISIBLE);
@@ -31,9 +31,9 @@ public class CommonCommands {
     }
 
     /**
-     *
-     * @param element
-     * @param selectText
+     * Picks an option from a dropdown by its visible text.
+     * @param element the dropdown element
+     * @param selectText the option text to select
      */
     public static void selectDropDown(WebElement element, String selectText) {
         until(element, Until.VISIBLE);
@@ -43,12 +43,18 @@ public class CommonCommands {
         log.info("Drop down select value '{}'", selectText);
     }
 
+    /** Blocks until the page is fully loaded. Uses JS readyState check. */
     public static void waitForPageLoad() {
         buildWait(Driver.getDriver())
                 .until(driver -> ((JavascriptExecutor) driver)
                         .executeScript("return document.readyState").equals("complete"));
     }
 
+    /**
+     * Clears the field and types the given text into it.
+     * @param element the input field
+     * @param textToType text to enter
+     */
     public static void type(WebElement element, String textToType) {
         until(element, Until.VISIBLE);
         until(element, Until.CLICKABLE);
@@ -64,6 +70,11 @@ public class CommonCommands {
         ENABLED       // element is enabled (e.g. button not disabled)
     }
 
+    /**
+     * Waits for the element to meet the given condition before returning it.
+     * @param element the element to wait on
+     * @param condition the expected state to wait for
+     */
     public static WebElement until(WebElement element, Until condition) {
         FluentWait<WebDriver> wait = buildWait(Driver.getDriver());
 
@@ -86,7 +97,11 @@ public class CommonCommands {
         }
     }
 
-    public static FluentWait<WebDriver> buildWait(WebDriver driver) {
+    /**
+     * Returns a FluentWait configured with the default timeout and polling interval.
+     * @param driver the active WebDriver instance
+     */
+     static FluentWait<WebDriver> buildWait(WebDriver driver) {
         return new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS))    // Max wait time
                 .pollingEvery(Duration.ofMillis(DEFAULT_POLLING_MS))   // Frequency of DOM checks
