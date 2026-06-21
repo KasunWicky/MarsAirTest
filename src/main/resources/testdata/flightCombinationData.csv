@@ -1,7 +1,9 @@
 ﻿departing,returning,promoCode,expectedResult
 Select...,Select...,,"Unfortunately, this schedule is not possible. Please try again."
+Select...,July (next year),,"Unfortunately, this schedule is not possible. Please try again."
+July,Select...,,"Unfortunately, this schedule is not possible. Please try again."
 July,July,,"Unfortunately, this schedule is not possible. Please try again."
-July,December,,"Unfortunately, this schedule is not possible. Please try again."
+July,December,,"Unfortunately, this schedule is not possible. Please t  ry again."
 July,July (next year),,"Sorry, there are no more seats available."
 July,December (next year),,"Sorry, there are no more seats available."
 July,July (two years from now),,"Sorry, there are no more seats available."
@@ -36,3 +38,32 @@ December (two years from now),July (next year),,"Unfortunately, this schedule is
 December (two years from now),December (next year),,"Unfortunately, this schedule is not possible. Please try again."
 December (two years from now),July (two years from now),,"Unfortunately, this schedule is not possible. Please try again."
 December (two years from now),December (two years from now),,"Unfortunately, this schedule is not possible. Please try again."
+July,December (two years from now),AF3-FJK-418,Seats available!
+July,December (two years from now),JJ5-OPQ-320,Seats available!
+July,December (two years from now),MN2-ABC-158,Seats available!
+July,December (two years from now),ZB4-PQR-273,Seats available!
+July,December (two years from now),KR6-WXY-916,Seats available!
+July,December (two years from now),af3-fjk-418,Seats available!
+July,December (two years from now),AF3FJK418,Seats available!
+July,December (two years from now),xxx,Seats available!
+July,December (two years from now),123,Seats available!
+July,December (two years from now),1%3,Seats available!
+July,December (two years from now),AFX-FJK-418,Seats available!
+July,December (two years from now),AF-FJK-418,Seats available!
+July,December (two years from now),AF33-FJK-418,Seats available!
+July,December (two years from now),AF3-FJ-418,Seats available!
+July,December (two years from now),AF3-FJK-41,Seats available!
+July,December (two years from now),123-ABC-456,Seats available!
+July,December (two years from now),AF3-FJK-419,Seats available!
+July,December (two years from now),JJ5-OPQ-321,Seats available!
+July,December (two years from now),MN2-ABC-155,Seats available!
+July,December (two years from now),ZB4-PQR-277,Seats available!
+July,December (two years from now),KR6-WXY-918,Seats available!
+July,December (two years from now),BC7-MNO-432,Seats available!
+July,December (two years from now),HT8-RST-651,Seats available!
+July,December (two years from now),PL9-UVW-820,Seats available!
+July,December (two years from now),' OR '1'='1,Seats available!
+July,December (two years from now),' OR 1=1--,Seats available!
+July,December (two years from now),'; DROP TABLE users;--,Seats available!
+July,December (two years from now),%27 OR %271%27=%271,Seats available!
+July,December (two years from now),<script>alert(1)</script>,Seats available!
