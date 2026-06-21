@@ -52,12 +52,4 @@ class ConfigManager {
         }
     }
 
-    public static float getFloat(String key) {
-        try {
-            return Float.parseFloat(get(key));
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Configuration key '" + key + "' value cannot be parsed to a Float.", e);
-        }
-    }
-
 }
