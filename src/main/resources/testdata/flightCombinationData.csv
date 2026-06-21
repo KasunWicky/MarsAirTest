@@ -1,5 +1,5 @@
-departing,returning,promoCode,expectedResult
-Select…,Select…,,"Unfortunately, this schedule is not possible. Please try again."
+﻿departing,returning,promoCode,expectedResult
+Select...,Select...,,"Unfortunately, this schedule is not possible. Please try again."
 July,July,,"Unfortunately, this schedule is not possible. Please try again."
 July,December,,"Unfortunately, this schedule is not possible. Please try again."
 July,July (next year),,"Sorry, there are no more seats available."
