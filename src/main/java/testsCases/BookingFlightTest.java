@@ -41,7 +41,9 @@ public class BookingFlightTest extends CommonCommands {
         MainPage mainPage = new MainPage(driver);
         fillAndSubmitSearchForm(mainPage, departing, returning, promoCode);
         verifyResults(promoCode, expectedResults);
+        navigateBack();
         softAssert.assertAll();
+
     }
 
     private void fillAndSubmitSearchForm(MainPage mainPage, String departing, String returning, String promoCode) {
@@ -66,6 +68,7 @@ public class BookingFlightTest extends CommonCommands {
         } else {
             verifySearchResults(expectedResults);
         }
+
     }
 
     private void navigateBack() {
