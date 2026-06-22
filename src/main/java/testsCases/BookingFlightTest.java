@@ -41,7 +41,6 @@ public class BookingFlightTest extends CommonCommands {
         MainPage mainPage = new MainPage(driver);
         fillAndSubmitSearchForm(mainPage, departing, returning, promoCode);
         verifyResults(promoCode, expectedResults);
-        navigateBack();
         softAssert.assertAll();
     }
 
@@ -76,18 +75,17 @@ public class BookingFlightTest extends CommonCommands {
 
     private void verifySearchResults(String expectedResult) {
         searchResultPage = new SearchResultPage(driver);
-        waitForPageLoad();
         log.info("Verifying Search result page output");
-        Assert.assertEquals(searchResultPage.getMainHeader().getText(), "Search Results");
+        waitForPageLoad();
+        softAssert.assertEquals(getText(searchResultPage.getMainHeader()), "Search Results");
         log.info("Validating search result page");
-        softAssert.assertEquals(searchResultPage.getResultText().getText(), expectedResult);
-
+        softAssert.assertEquals(getText(searchResultPage.getResultText()), expectedResult);
     }
 
     private void verifySearchResultsPromoCode(String expectedResult, String expectedPromoResult) {
         verifySearchResults(expectedResult);
         log.info("Validating promotional code message");
-        softAssert.assertEquals(searchResultPage.getResultSecondaryText().getText(), expectedPromoResult);
+        softAssert.assertEquals(getText(searchResultPage.getResultSecondaryText()), expectedPromoResult);
     }
 
     @AfterClass(alwaysRun = true)
