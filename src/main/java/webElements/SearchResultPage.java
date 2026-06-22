@@ -12,23 +12,23 @@ public class SearchResultPage {
         this.driver = driver;
     }
 
-    public WebElement getMainHeader() {
-        return driver.findElement(By.cssSelector("h2"));
+    public By getMainHeader() {
+        return By.tagName("h2");
     }
 
-    public WebElement getBackLink() {
-        return driver.findElement(By.xpath("//a[text()=' Back']"));
+    public By getBackLink() {
+        return By.xpath("//a[text()=' Back']");
     }
 
-    public WebElement getResultText() {
-        return driver.findElement(By.cssSelector("div#content>p:nth-of-type(1)"));
+    public By getResultText() {
+        return By.cssSelector("div#content>p:nth-of-type(1)");
     }
 
-    public WebElement getResultSecondaryText() {
-        return driver.findElement(By.cssSelector("div#content>p:nth-of-type(2)"));
+    public By getResultSecondaryText() {
+        return By.cssSelector("div#content>p:nth-of-type(2)");
     }
 
-    public WebElement getCallNowResultText() {
-        return driver.findElement(By.cssSelector("div#content>p:nth-of-type(3)"));
+    public By getCallNowResultText() {
+        return By.cssSelector("div#content>p:nth-of-type(3)");
     }
 }

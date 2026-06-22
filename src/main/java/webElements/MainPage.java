@@ -1,5 +1,6 @@
 package webElements;
 
+import driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,27 +13,27 @@ public class MainPage {
         this.driver = driver;
     }
 
-    public WebElement getDepartingDropdown() {
-        return driver.findElement(By.id("departing"));
+
+    public By getDepartingDropdown() {
+        return By.id("departing");
+    }
+    public By getReturningDropdown() {
+        return By.id("returning");
     }
 
-    public WebElement getReturningDropdown() {
-        return driver.findElement(By.id("returning"));
+    public By getPromotionalCodeField() {
+        return By.id("promotional_code");
     }
 
-    public WebElement getPromotionalCodeField() {
-        return driver.findElement(By.id("promotional_code"));
+    public By getSearchButton() {
+        return By.cssSelector("input[type='submit']");
     }
 
-    public WebElement getSearchButton() {
-        return driver.findElement(By.cssSelector("input[type='submit']"));
+    public By getMainHeader() {
+        return By.cssSelector("h2");
     }
 
-    public WebElement getMainHeader() {
-        return driver.findElement(By.cssSelector("h2"));
-    }
-
-    public WebElement getSubHeader() {
-        return driver.findElement(By.cssSelector("h3"));
+    public By getSubHeader() {
+        return By.cssSelector("h3");
     }
 }
