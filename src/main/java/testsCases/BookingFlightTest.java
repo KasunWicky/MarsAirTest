@@ -37,33 +37,41 @@ public class BookingFlightTest extends CommonCommands {
 
     @Test(dependsOnMethods = "verifyingHomePage", dataProvider = "flightScheduleData")
     public void bookFlight(String departing, String returning, String promoCode, String expectedResults) {
+        softAssert = new SoftAssert();
         MainPage mainPage = new MainPage(driver);
+        fillAndSubmitSearchForm(mainPage, departing, returning, promoCode);
+        verifyResults(promoCode, expectedResults);
+        navigateBack();
+        softAssert.assertAll();
+    }
+
+    private void fillAndSubmitSearchForm(MainPage mainPage, String departing, String returning, String promoCode) {
         waitForPageLoad();
         until(mainPage.getDepartingDropdown(), Until.VISIBLE);
-        softAssert = new SoftAssert();
         log.info("Selecting 'Departing' DropDown");
         selectDropDown(mainPage.getDepartingDropdown(), departing);
         log.info("Selecting 'Returning' DropDown");
         selectDropDown(mainPage.getReturningDropdown(), returning);
         if (!promoCode.isEmpty()) {
-            log.info("Promotional code :'{}' is present", promoCode);
+            log.info("Promotional code: '{}' is present", promoCode);
             type(mainPage.getPromotionalCodeField(), promoCode);
         }
         log.info("User hit the submit button");
         click(mainPage.getSearchButton());
         waitForPageLoad();
+    }
+
+    private void verifyResults(String promoCode, String expectedResults) {
         if (!promoCode.isEmpty()) {
-            //Verifying the promotional code
             verifySearchResultsPromoCode(expectedResults, Utility.buildExpectedPromoResult(promoCode));
         } else {
-            //Verifying without the promotional code
             verifySearchResults(expectedResults);
-
         }
+    }
+
+    private void navigateBack() {
         click(searchResultPage.getBackLink());
         waitForPageLoad();
-
-        softAssert.assertAll();
     }
 
     private void verifySearchResults(String expectedResult) {
